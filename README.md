@@ -1,337 +1,144 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوت الرقصات واللايكات</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>PICASSO FF PRO</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(180deg, #000000, #1a0000);
+  color: white;
+  text-align: center;
+}
 
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
+/* 😈 PROFILE */
+.profile {
+  margin-top: 20px;
+}
+.profile img {
+  width: 120px;
+  border-radius: 50%;
+  border: 3px solid red;
+  box-shadow: 0 0 20px red;
+}
 
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-        }
+h2 {
+  color: red;
+  text-shadow: 0 0 10px red;
+}
 
-        .login-form {
-            margin-bottom: 30px;
-        }
+/* 🔐 LOGIN */
+.container {
+  margin-top: 30px;
+}
 
-        .input-group {
-            margin-bottom: 20px;
-            text-align: right;
-        }
+input {
+  padding: 12px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 220px;
+  background: #111;
+  color: white;
+}
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
-        }
+button {
+  padding: 12px 25px;
+  background: red;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-        input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            text-align: right;
-        }
+button:hover {
+  background: darkred;
+  transform: scale(1.1);
+}
 
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
+/* 🤖 PANEL */
+.panel {
+  display: none;
+}
 
-        .btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        }
-
-        .dashboard {
-            display: none;
-        }
-
-        .bot-section {
-            margin-top: 30px;
-            padding: 25px;
-            background: #f8f9ff;
-            border-radius: 15px;
-            border: 2px solid #e3e8ff;
-        }
-
-        .bot-title {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .option-btn {
-            padding: 15px 20px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .dance-btn { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333; }
-        .like-btn { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #333; }
-        .scene-btn { background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); color: #333; }
-
-        .option-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .form-hidden {
-            display: none;
-        }
-
-        .active-form {
-            margin-top: 20px;
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            border: 2px solid #667eea;
-        }
-
-        .team-code-group {
-            margin-top: 15px;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 25px 20px;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
-        }
-    </style>
+.box {
+  background: #111;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px red;
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- شاشة تسجيل الدخول -->
-        <div id="loginScreen">
-            <h1>🎵 بوت الرقصات واللايكات 🎵</h1>
-            <div class="login-form">
-                <div class="input-group">
-                    <label>اسم المستخدم</label>
-                    <input type="text" id="username" placeholder="أدخل اسمك">
-                </div>
-                <div class="input-group">
-                    <label>كلمة المرور</label>
-                    <input type="password" id="password" placeholder="أدخل كلمة المرور">
-                </div>
-                <button class="btn" onclick="login()">دخول</button>
-            </div>
-        </div>
 
-        <!-- لوحة التحكم -->
-        <div id="dashboard" class="dashboard">
-            <h1>مرحباً بك! 👋</h1>
-            <p>اختر البوت الذي تريده:</p>
-            
-            <div class="bot-section">
-                <div class="bot-title">🤖 بوت الرقصات</div>
-                <div class="options">
-                    <button class="option-btn dance-btn" onclick="showDanceForm()">تشغيل بوت الرقصات</button>
-                </div>
-            </div>
+<!-- 😈 PROFILE -->
+<div class="profile">
+  <img src="https://i.imgur.com/6VBx3io.png">
+  <h2>PICASSO FF PRO 😈</h2>
+</div>
 
-            <div class="bot-section">
-                <div class="bot-title">❤️ بوت اللايكات</div>
-                <div class="options">
-                    <button class="option-btn like-btn" onclick="showLikeForm()">تشغيل بوت اللايكات</button>
-                </div>
-            </div>
+<!-- 🔐 LOGIN -->
+<div class="container" id="loginBox">
+  <h3>Login / Sign Up</h3>
+  <input type="text" placeholder="Username"><br>
+  <input type="password" placeholder="Password"><br>
+  <button onclick="login()">Enter</button>
+</div>
 
-            <div class="bot-section">
-                <div class="bot-title">🎬 بوت المشاهدات</div>
-                <div class="options">
-                    <button class="option-btn scene-btn" onclick="showSceneForm()">تشغيل بوت المشاهدات</button>
-                </div>
-            </div>
+<!-- 🤖 PANEL -->
+<div class="panel" id="panel">
 
-            <!-- نموذج بوت الرقصات -->
-            <div id="danceForm" class="form-hidden active-form">
-                <h3>⚡ بوت الرقصات</h3>
-                <div class="input-group">
-                    <label>ID الفيديو</label>
-                    <input type="text" id="danceId" placeholder="أدخل ID الفيديو">
-                </div>
-                <div class="team-code-group input-group">
-                    <label>كود الفريق (اختياري)</label>
-                    <input type="text" id="teamCode" placeholder="أدخل كود الفريق">
-                </div>
-                <button class="btn btn-success" onclick="startDanceBot()">بدء البوت</button>
-                <button class="btn btn-secondary" onclick="hideForms()">رجوع</button>
-            </div>
+  <!-- MENU -->
+  <div class="box">
+    <h3>Choose Bot</h3>
+    <button onclick="show('dance')">💃 Dance Bot</button>
+    <button onclick="show('like')">❤️ Like Bot</button>
+    <button onclick="show('view')">👁 View Bot</button>
+  </div>
 
-            <!-- نموذج بوت اللايكات -->
-            <div id="likeForm" class="form-hidden">
-                <h3>❤️ بوت اللايكات</h3>
-                <div class="input-group">
-                    <label>ID الفيديو</label>
-                    <input type="text" id="likeId" placeholder="أدخل ID الفيديو">
-                </div>
-                <button class="btn btn-success" onclick="startLikeBot()">بدء البوت</button>
-                <button class="btn btn-secondary" onclick="hideForms()">رجوع</button>
-            </div>
+  <!-- 💃 DANCE -->
+  <div class="box" id="dance" style="display:none;">
+    <h3>Dance Bot</h3>
+    <input placeholder="Player ID"><br>
+    <input placeholder="Team Code"><br>
+    <button onclick="alert('💃 Dance Sent!')">Send</button>
+  </div>
 
-            <!-- نموذج بوت المشاهدات -->
-            <div id="sceneForm" class="form-hidden">
-                <h3>🎬 بوت المشاهدات</h3>
-                <div class="input-group">
-                    <label>ID الفيديو</label>
-                    <input type="text" id="sceneId" placeholder="أدخل ID الفيديو">
-                </div>
-                <button class="btn btn-success" onclick="startSceneBot()">بدء البوت</button>
-                <button class="btn btn-secondary" onclick="hideForms()">رجوع</button>
-            </div>
-        </div>
-    </div>
+  <!-- ❤️ LIKE -->
+  <div class="box" id="like" style="display:none;">
+    <h3>Like Bot</h3>
+    <input placeholder="Player ID"><br>
+    <button onclick="alert('❤️ Likes Sent!')">Send</button>
+  </div>
 
-    <script>
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username && password) {
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-            } else {
-                alert('يرجى إدخال اسم المستخدم وكلمة المرور');
-            }
-        }
+  <!-- 👁 VIEW -->
+  <div class="box" id="view" style="display:none;">
+    <h3>View Bot</h3>
+    <input placeholder="Player ID"><br>
+    <button onclick="alert('👁 Views Sent!')">Send</button>
+  </div>
 
-        function showDanceForm() {
-            hideForms();
-            document.getElementById('danceForm').style.display = 'block';
-        }
+</div>
 
-        function showLikeForm() {
-            hideForms();
-            document.getElementById('likeForm').style.display = 'block';
-        }
+<script>
+function login(){
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("panel").style.display = "block";
+}
 
-        function showSceneForm() {
-            hideForms();
-            document.getElementById('sceneForm').style.display = 'block';
-        }
+function show(bot){
+  document.getElementById("dance").style.display = "none";
+  document.getElementById("like").style.display = "none";
+  document.getElementById("view").style.display = "none";
 
-        function hideForms() {
-            document.getElementById('danceForm').style.display = 'none';
-            document.getElementById('likeForm').style.display = 'none';
-            document.getElementById('sceneForm').style.display = 'none';
-        }
+  document.getElementById(bot).style.display = "block";
+}
+</script>
 
-        function startDanceBot() {
-            const id = document.getElementById('danceId').value;
-            const teamCode = document.getElementById('teamCode').value;
-            
-            if (!id) {
-                alert('يرجى إدخال ID الفيديو');
-                return;
-            }
-            
-            alert(`🚀 تم تشغيل بوت الرقصات!\nID: ${id}\nكود الفريق: ${teamCode || 'غير محدد'}\n\nالبوت يعمل الآن...`);
-            // هنا تضع رابط API الخاص بك
-        }
-
-        function startLikeBot() {
-            const id = document.getElementById('likeId').value;
-            
-            if (!id) {
-                alert('يرجى إدخال ID الفيديو');
-                return;
-            }
-            
-            alert(`❤️ تم تشغيل بوت اللايكات!\nID: ${id}\n\nالبوت يعمل الآن...`);
-        }
-
-        function startSceneBot() {
-            const id = document.getElementById('sceneId').value;
-            
-            if (!id) {
-                alert('يرجى إدخال ID الفيديو');
-                return;
-            }
-            
-            alert(`🎬 تم تشغيل بوت المشاهدات!\nID: ${id}\n\nالبوت يعمل الآن...`);
-        }
-
-        // السماح بالدخول بـ Enter
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                if (document.getElementById('loginScreen').style.display !== 'none') {
-                    login();
-                }
-            }
-        });
-    </script>
 </body>
 </html>
