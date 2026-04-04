@@ -8,30 +8,14 @@
 body {
   margin: 0;
   font-family: Arial;
-  background: linear-gradient(180deg, #000000, #1a0000);
+  background: linear-gradient(180deg, black, #1a0000);
   color: white;
   text-align: center;
 }
 
-/* 😈 PROFILE */
-.profile {
-  margin-top: 20px;
-}
-.profile img {
-  width: 120px;
-  border-radius: 50%;
-  border: 3px solid red;
-  box-shadow: 0 0 20px red;
-}
-
-h2 {
-  color: red;
-  text-shadow: 0 0 10px red;
-}
-
 /* 🔐 LOGIN */
-.container {
-  margin-top: 30px;
+.login-box {
+  margin-top: 50px;
 }
 
 input {
@@ -59,6 +43,14 @@ button:hover {
   transform: scale(1.1);
 }
 
+/* 😈 PROFILE */
+.profile img {
+  width: 100px;
+  border-radius: 50%;
+  border: 3px solid red;
+  box-shadow: 0 0 20px red;
+}
+
 /* 🤖 PANEL */
 .panel {
   display: none;
@@ -83,17 +75,21 @@ button:hover {
 </div>
 
 <!-- 🔐 LOGIN -->
-<div class="container" id="loginBox">
-  <h3>Login / Sign Up</h3>
+<div class="login-box" id="login">
+  <h3>Login / Create Account</h3>
   <input type="text" placeholder="Username"><br>
   <input type="password" placeholder="Password"><br>
-  <button onclick="login()">Enter</button>
+  <button onclick="enter()">Enter</button>
+
+  <p>OR</p>
+
+  <button>🔵 Google</button>
+  <button>⚫ GitHub</button>
 </div>
 
 <!-- 🤖 PANEL -->
 <div class="panel" id="panel">
 
-  <!-- MENU -->
   <div class="box">
     <h3>Choose Bot</h3>
     <button onclick="show('dance')">💃 Dance Bot</button>
@@ -101,33 +97,33 @@ button:hover {
     <button onclick="show('view')">👁 View Bot</button>
   </div>
 
-  <!-- 💃 DANCE -->
+  <!-- 💃 -->
   <div class="box" id="dance" style="display:none;">
     <h3>Dance Bot</h3>
     <input placeholder="Player ID"><br>
     <input placeholder="Team Code"><br>
-    <button onclick="alert('💃 Dance Sent!')">Send</button>
+    <button onclick="alert('💃 Done')">Send</button>
   </div>
 
-  <!-- ❤️ LIKE -->
+  <!-- ❤️ -->
   <div class="box" id="like" style="display:none;">
     <h3>Like Bot</h3>
     <input placeholder="Player ID"><br>
-    <button onclick="alert('❤️ Likes Sent!')">Send</button>
+    <button onclick="alert('❤️ Done')">Send</button>
   </div>
 
-  <!-- 👁 VIEW -->
+  <!-- 👁 -->
   <div class="box" id="view" style="display:none;">
     <h3>View Bot</h3>
     <input placeholder="Player ID"><br>
-    <button onclick="alert('👁 Views Sent!')">Send</button>
+    <button onclick="alert('👁 Done')">Send</button>
   </div>
 
 </div>
 
 <script>
-function login(){
-  document.getElementById("loginBox").style.display = "none";
+function enter(){
+  document.getElementById("login").style.display = "none";
   document.getElementById("panel").style.display = "block";
 }
 
